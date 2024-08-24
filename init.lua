@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -254,6 +254,28 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
+  },
+
+  {
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim', -- show diagnostics using virtual lines
+    config = function()
+      local lsp_lines = require 'lsp_lines'
+
+      lsp_lines.setup()
+
+      vim.keymap.set('n', 'g?', function()
+        local lines_enabled = not vim.diagnostic.config().virtual_lines
+        vim.diagnostic.config {
+          virtual_lines = lines_enabled,
+          virtual_text = not lines_enabled,
+        }
+      end, { noremap = true, silent = true, desc = 'Change diagnostics style' })
+
+      vim.diagnostic.config {
+        virtual_text = true,
+        virtual_lines = false,
+      }
+    end,
   },
 
   {
@@ -932,12 +954,12 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
