@@ -256,6 +256,26 @@ require('lazy').setup({
     },
   },
 
+  {
+    'catppuccin/nvim',
+    config = function()
+      require('catppuccin').setup {
+        flavour = 'macchiato', -- latte, frappe, macchiato, mocha
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          nvimtree = true,
+          treesitter = true,
+          -- fidget = true,
+          mason = true,
+          telescope = {
+            enabled = true,
+          },
+        },
+      }
+      vim.cmd.colorscheme 'catppuccin'
+    end,
+  },
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -944,6 +964,7 @@ require('lazy').setup({
       task = '📌',
       lazy = '💤 ',
     },
+    border = 'rounded',
   },
 })
 
