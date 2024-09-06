@@ -326,13 +326,6 @@ require('lazy').setup({
     priority = 1000,
   },
   {
-    'L3MON4D3/LuaSnip',
-    keys = function()
-      -- Disable default tab keybinding in LuaSnip
-      return {}
-    end,
-  },
-  {
     'Bekaboo/dropbar.nvim',
     -- optional, but required for fuzzy finder support
     dependencies = {
@@ -374,17 +367,27 @@ require('lazy').setup({
           },
         },
       }
-      vim.cmd.colorscheme 'catppuccin'
+      -- vim.cmd.colorscheme 'catppuccin'
     end,
+  },
+  {
+    'L3MON4D3/LuaSnip',
+    version = 'v2.*',
+    build = 'make install_jsregexp',
   },
   {
     'scottmckendry/cyberdream.nvim',
     lazy = false,
     priority = 1000,
     opts = function(_, opts)
-      opts.transparent = true
+      opts.transparent = false
       opts.italic_comments = true
-      opts.borderless_telescope = false
+      opts.borderless_telescope = true
+      opts.theme = {
+        colors = {
+          bg = '#000000',
+        },
+      }
     end,
   },
   {
@@ -683,11 +686,11 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
+          winblend = 0,
           previewer = false,
           layout_config = {
-            width = 0.8,
-            height = 0.8,
+            width = 0.9,
+            height = 0.9,
           },
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
@@ -1100,7 +1103,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      -- vim.cmd.colorscheme 'tokyonight-night'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
