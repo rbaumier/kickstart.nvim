@@ -844,7 +844,11 @@ require('lazy').setup({
     init = function()
       vim.g.coq_settings = {
         auto_start = true, -- if you want to start COQ at startup
-        -- Your COQ settings here
+        keymap = {
+          recommended = true,
+          pre_select = true, -- This will pre-select the first item
+        },
+        -- Your other COQ settings here
       }
     end,
     config = function()
